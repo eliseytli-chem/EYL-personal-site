@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleList from '../components/ArticleList.astro';
+import { getPublicEssays } from '../lib/essays';
+const articles = (await getPublicEssays()).filter(({ data }) => data.featured);
+---
+
+<BaseLayout title="精選文章｜一頁之間" description="從個人文庫中選出的代表文章。">
+  <header class="page-heading">
+    <p class="eyebrow">精選文章</p>
+    <h1>值得從這裡開始的文字</h1>
+    <p class="lead">一些適合初次來訪，也值得日後重讀的文章。</p>
+  </header>
+  <ArticleList articles={articles} emptyText="目前還沒有精選文章。" />
+</BaseLayout>

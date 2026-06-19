@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { categorySlug, getPublicEssays, MAIN_CATEGORIES, type Essay } from '../../lib/essays';
+
+export async function getStaticPaths() {
+  const articles = await getPublicEssays();
+  const categories = [...new Set([...MAIN_CATEGORIES.map(({ name }) => name), ...articles.map(({ data }) => data.category)])];
+  return categories.map((category) => ({
+    params: { category: categorySlug(category) },
+    props: { category, articles: articles.filter(({ data }) => data.category === category) },
+  }));
+}
+
+interface Props { category: string; articles: Essay[] }
+const { category, articles } = Astro.props;
+---
+
+<BaseLayout title={`${category}｜文章分類｜一頁之間`} description={`「${category}」分類的文章。`}>
+  <header class="page-heading"><p class="eyebrow">文章分類</p><h1>{category}</h1><p class="lead">共 {articles.length} 篇文章</p></header>
+  <ArticleList articles={articles} />
+</BaseLayout>

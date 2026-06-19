@@ -1,0 +1,26 @@
+---
+import { sitePath } from '../lib/urls';
+
+const pathname = Astro.url.pathname;
+const links = [
+  { href: sitePath('/essays/'), label: '文章典藏' },
+  { href: sitePath('/categories/'), label: '分類' },
+  { href: sitePath('/tags/'), label: '標籤' },
+  { href: sitePath('/featured/'), label: '精選' },
+  { href: sitePath('/search/'), label: '搜尋' },
+  { href: sitePath('/about/'), label: '關於' },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-name" href={sitePath('/')} aria-label="回到首頁">一頁之間</a>
+    <nav aria-label="主要導覽">
+      {links.map((link) => (
+        <a href={link.href} aria-current={pathname.startsWith(link.href) ? 'page' : undefined}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

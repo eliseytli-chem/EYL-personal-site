@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { getPublicEssays, type Essay } from '../../lib/essays';
+
+export async function getStaticPaths() {
+  const articles = await getPublicEssays();
+  return [...new Set(articles.flatMap(({ data }) => data.tags))].map((tag) => ({
+    params: { tag },
+    props: { tag, articles: articles.filter(({ data }) => data.tags.includes(tag)) },
+  }));
+}
+
+interface Props { tag: string; articles: Essay[] }
+const { tag, articles } = Astro.props;
+---
+
+<BaseLayout title={`#${tag}｜文章標籤｜一頁之間`} description={`標記為「${tag}」的文章。`}>
+  <header class="page-heading"><p class="eyebrow">文章標籤</p><h1>#{tag}</h1><p class="lead">共 {articles.length} 篇文章</p></header>
+  <ArticleList articles={articles} />
+</BaseLayout>

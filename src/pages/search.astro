@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { categoryPath, essayPath, formatDate, getPublicEssays, tagPath } from '../lib/essays';
+import { sitePath } from '../lib/urls';
+
+// 搜尋索引只取 public；文章正文與非公開 metadata 都不會進入頁面。
+const essays = await getPublicEssays();
+---
+
+<BaseLayout title="搜尋｜一頁之間" description="搜尋一頁之間的公開文章。">
+  <header class="page-heading search-heading">
+    <p class="eyebrow">站內搜尋</p>
+    <h1>尋找一篇文章</h1>
+    <p class="lead">可搜尋標題、摘要、分類與標籤。</p>
+  </header>
+
+  <form class="search-form" action={sitePath('/search/')} method="get" role="search">
+    <label for="search-input">搜尋文章</label>
+    <div class="search-control">
+      <input id="search-input" name="q" type="search" autocomplete="off" placeholder="例如：閱讀、教育、日常" />
+      <button type="submit">搜尋</button>
+    </div>
+  </form>
+
+  <p id="search-status" class="search-status" aria-live="polite">輸入關鍵字開始搜尋。</p>
+
+  <ol id="search-results" class="article-list search-results">
+    {essays.map((essay) => (
+      <li data-search-item data-search={[essay.data.title, essay.data.description, essay.data.category, ...essay.data.tags].join(' ')} hidden>
+        <article>
+          <div class="article-meta">
+            <time datetime={essay.data.date.toISOString()}>{formatDate(essay.data.date)}</time>
+            <span aria-hidden="true">·</span>
+            <a href={categoryPath(essay.data.category)}>{essay.data.category}</a>
+          </div>
+          <h2><a href={essayPath(essay)}>{essay.data.title}</a></h2>
+          <p>{essay.data.description}</p>
+          <ul class="tag-list" aria-label="文章標籤">
+            {essay.data.tags.map((tag) => <li><a href={tagPath(tag)}>#{tag}</a></li>)}
+          </ul>
+        </article>
+      </li>
+    ))}
+  </ol>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>('.search-form');
+    const input = document.querySelector<HTMLInputElement>('#search-input');
+    const status = document.querySelector<HTMLElement>('#search-status');
+    const items = [...document.querySelectorAll<HTMLElement>('[data-search-item]')];
+
+    const normalize = (value: string) => value.normalize('NFKC').toLocaleLowerCase('zh-Hant').trim();
+
+    function search(query: string, updateUrl = false) {
+      const normalizedQuery = normalize(query);
+      const keywords = normalizedQuery.split(/\s+/).filter(Boolean);
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        normalizedQuery ? url.searchParams.set('q', query.trim()) : url.searchParams.delete('q');
+        window.history.replaceState({}, '', url);
+      }
+
+      if (keywords.length === 0) {
+        items.forEach((item) => { item.hidden = true; });
+        if (status) status.textContent = '輸入關鍵字開始搜尋。';
+        return;
+      }
+
+      let count = 0;
+      items.forEach((item) => {
+        const haystack = normalize(item.dataset.search ?? '');
+        const matches = keywords.every((keyword) => haystack.includes(keyword));
+        item.hidden = !matches;
+        if (matches) count += 1;
+      });
+
+      if (status) status.textContent = count > 0 ? `找到 ${count} 篇文章。` : '沒有找到相符的文章。';
+    }
+
+    const initialQuery = new URLSearchParams(window.location.search).get('q') ?? '';
+    if (input) input.value = initialQuery;
+    search(initialQuery);
+
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      search(input?.value ?? '', true);
+    });
+  </script>
+</BaseLayout>

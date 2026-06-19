@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleList from '../components/ArticleList.astro';
+import { categoryPath, essayPath, formatDate, getPublicEssays, MAIN_CATEGORIES } from '../lib/essays';
+import { sitePath } from '../lib/urls';
+
+const articles = await getPublicEssays();
+const featured = articles.filter(({ data }) => data.featured);
+const latest = articles.slice(0, 6);
+---
+
+<BaseLayout title="一頁之間｜個人文庫" description="關於家庭閱讀、育兒、教育、科學與文學的個人作家網站。">
+  <section class="home-intro" aria-labelledby="site-title">
+    <p class="home-kicker">一座緩慢生長的個人文庫</p>
+    <h1 id="site-title">一頁之間</h1>
+    <p class="home-subtitle">寫下閱讀與養育，科學與日常；在生活的縫隙裡，保存值得重讀的思考。</p>
+    <a class="home-about-link" href={sitePath('/about/')}>關於作者 <span aria-hidden="true">→</span></a>
+  </section>
+
+  <section class="home-section" aria-labelledby="featured-heading">
+    <div class="section-heading">
+      <div>
+        <p class="section-index" aria-hidden="true">01</p>
+        <h2 id="featured-heading">精選文章</h2>
+      </div>
+      <a class="text-link" href={sitePath('/featured/')}>全部精選</a>
+    </div>
+    {featured.length === 0 ? (
+      <p class="empty-state">精選文章正在整理中。</p>
+    ) : (
+      <div class="featured-grid">
+        {featured.map((essay) => (
+          <article class="featured-card">
+            <p class="article-meta"><time datetime={essay.data.date.toISOString()}>{formatDate(essay.data.date)}</time><span>·</span><span>{essay.data.category}</span></p>
+            <h3><a href={essayPath(essay)}>{essay.data.title}</a></h3>
+            <p>{essay.data.description}</p>
+            <a class="read-link" href={essayPath(essay)} aria-label={`閱讀〈${essay.data.title}〉`}>閱讀文章 <span aria-hidden="true">→</span></a>
+          </article>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <section class="home-section" aria-labelledby="categories-heading">
+    <div class="section-heading">
+      <div>
+        <p class="section-index" aria-hidden="true">02</p>
+        <h2 id="categories-heading">書寫的路徑</h2>
+      </div>
+      <a class="text-link" href={sitePath('/categories/')}>所有分類</a>
+    </div>
+    <ol class="home-categories">
+      {MAIN_CATEGORIES.map((category, index) => (
+        <li>
+          <a href={categoryPath(category.name)}>
+            <span class="category-number">{String(index + 1).padStart(2, '0')}</span>
+            <span class="category-name">{category.name}</span>
+            <span class="category-note">{category.note}</span>
+            <span class="category-arrow" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="home-section latest-section" aria-labelledby="latest-heading">
+    <div class="section-heading">
+      <div>
+        <p class="section-index" aria-hidden="true">03</p>
+        <h2 id="latest-heading">最新文章</h2>
+      </div>
+      <a class="text-link" href={sitePath('/essays/')}>文章典藏</a>
+    </div>
+    <ArticleList articles={latest} />
+  </section>
+</BaseLayout>

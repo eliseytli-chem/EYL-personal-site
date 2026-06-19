@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleList from '../../components/ArticleList.astro';
+import { getPublicEssays } from '../../lib/essays';
+
+const essays = await getPublicEssays();
+---
+
+<BaseLayout title="文章典藏｜一頁之間" description="依日期倒序典藏的全部公開文章。">
+  <header class="page-heading">
+    <p class="eyebrow">文章典藏</p>
+    <h1>所有文章</h1>
+    <p class="lead">依時間由近至遠，保存一路寫下來的日常與思考。</p>
+  </header>
+  <ArticleList articles={essays} />
+</BaseLayout>

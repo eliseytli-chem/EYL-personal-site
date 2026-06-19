@@ -1,0 +1,34 @@
+---
+import type { Essay } from '../lib/essays';
+import { categoryPath, essayPath, formatDate, tagPath } from '../lib/essays';
+
+interface Props {
+  articles: Essay[];
+  emptyText?: string;
+}
+
+const { articles, emptyText = '這裡還沒有文章。' } = Astro.props;
+---
+
+{articles.length === 0 ? (
+  <p class="empty-state">{emptyText}</p>
+) : (
+  <ol class="article-list">
+    {articles.map((article) => (
+      <li>
+        <article>
+          <div class="article-meta">
+            <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
+            <span aria-hidden="true">·</span>
+            <a href={categoryPath(article.data.category)}>{article.data.category}</a>
+          </div>
+          <h2><a href={essayPath(article)}>{article.data.title}</a></h2>
+          <p>{article.data.description}</p>
+          <ul class="tag-list" aria-label="文章標籤">
+            {article.data.tags.map((tag) => <li><a href={tagPath(tag)}>#{tag}</a></li>)}
+          </ul>
+        </article>
+      </li>
+    ))}
+  </ol>
+)}

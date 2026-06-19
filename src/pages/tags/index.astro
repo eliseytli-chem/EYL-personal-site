@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublicEssays, tagPath } from '../../lib/essays';
+const articles = await getPublicEssays();
+const names = [...new Set(articles.flatMap(({ data }) => data.tags))];
+const tags = names
+  .map((name) => ({
+    name,
+    count: articles.filter(({ data }) => data.tags.includes(name)).length,
+  }))
+  .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name, 'zh-Hant'));
+---
+
+<BaseLayout title="文章標籤｜一頁之間" description="依細部主題瀏覽文章。">
+  <header class="page-heading"><p class="eyebrow">標籤</p><h1>從一個關鍵字出發</h1><p class="lead">跨越不同分類，找到彼此呼應的文字。</p></header>
+  <ul class="term-grid">
+    {tags.map(({ name, count }) => <li><a href={tagPath(name)}><span>#{name}</span><span>{count} 篇</span></a></li>)}
+  </ul>
+</BaseLayout>

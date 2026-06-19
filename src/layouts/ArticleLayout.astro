@@ -1,0 +1,57 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { categoryPath, essayPath, formatDate, tagPath, type Essay } from '../lib/essays';
+import { sitePath } from '../lib/urls';
+
+interface Props {
+  article: Essay;
+  previous?: Essay;
+  next?: Essay;
+}
+
+const { article, previous, next } = Astro.props;
+---
+
+<BaseLayout
+  title={`${article.data.title}｜一頁之間`}
+  description={article.data.description}
+  robots={article.data.visibility === 'unlisted' ? 'noindex, nofollow' : undefined}
+>
+  <article class="prose article-page">
+    <header class="article-header">
+      <p class="article-kind">文章典藏</p>
+      <h1>{article.data.title}</h1>
+      <p class="article-description">{article.data.description}</p>
+      <div class="article-details">
+        <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
+        <span aria-hidden="true">·</span>
+        <a href={categoryPath(article.data.category)}>{article.data.category}</a>
+      </div>
+      <ul class="tag-list article-tags" aria-label="文章標籤">
+        {article.data.tags.map((tag) => <li><a href={tagPath(tag)}>#{tag}</a></li>)}
+      </ul>
+    </header>
+    <div class="article-body">
+      <slot />
+    </div>
+    <footer class="article-footer">
+      {(previous || next) && (
+        <nav class="essay-navigation" aria-label="前後篇文章">
+          {previous ? (
+            <a class="essay-navigation-link previous" href={essayPath(previous)}>
+              <span class="navigation-label">← 上一篇</span>
+              <span class="navigation-title">{previous.data.title}</span>
+            </a>
+          ) : <span></span>}
+          {next && (
+            <a class="essay-navigation-link next" href={essayPath(next)}>
+              <span class="navigation-label">下一篇 →</span>
+              <span class="navigation-title">{next.data.title}</span>
+            </a>
+          )}
+        </nav>
+      )}
+      <div class="archive-return"><a href={sitePath('/essays/')}>回到文章典藏</a></div>
+    </footer>
+  </article>
+</BaseLayout>

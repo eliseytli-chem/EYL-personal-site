@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { categoryPath, getPublicEssays, MAIN_CATEGORIES } from '../../lib/essays';
+const articles = await getPublicEssays();
+const categories = [...new Set([...MAIN_CATEGORIES.map(({ name }) => name), ...articles.map(({ data }) => data.category)])]
+  .map((name) => ({ name, count: articles.filter(({ data }) => data.category === name).length }))
+  .sort((a, b) => a.name.localeCompare(b.name, 'zh-Hant'));
+---
+
+<BaseLayout title="文章分類｜一頁之間" description="依主題分類瀏覽文章。">
+  <header class="page-heading">
+    <p class="eyebrow">分類</p><h1>沿著主題閱讀</h1>
+    <p class="lead">每篇文章有一個主要歸處，讓長期累積的文字保有清楚脈絡。</p>
+  </header>
+  <ul class="term-grid">
+    {categories.map(({ name, count }) => <li><a href={categoryPath(name)}><span>{name}</span><span>{count} 篇</span></a></li>)}
+  </ul>
+</BaseLayout>
