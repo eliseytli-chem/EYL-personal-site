@@ -40,8 +40,8 @@ featured: false
 
 - `title`：必填，文章標題。
 - `date`：必填，使用可被明確解析的日期格式，建議為 `YYYY-MM-DD`。
-- `category`：必填，文章主要分類。
-- `tags`：必填，可為空陣列；用於補充主題標記。
+- `category`：必填，依文章內容選擇最適合的既有分類。
+- `tags`：必填，可為空陣列；用於補充主題標記，每篇至多五個。
 - `description`：必填，簡潔描述文章內容，供列表、分享與搜尋摘要使用。
 - `visibility`：必填，僅接受 `public`、`unlisted`、`private` 或 `draft`。
 - `featured`：必填，布林值，表示是否精選。
