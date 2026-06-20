@@ -1,6 +1,6 @@
 ---
 title: 豐盛
-date: 2026-06-20
+date: 2016-11-12
 category: 人生散文
 tags:
   - 母職
@@ -8,7 +8,7 @@ tags:
   - 家庭
   - 階級流動
   - 成長
-description: 孩子擁有得更多，父母對未來的擔心卻沒有變少。
+description: 孩子擁有得是更多還是更少
 visibility: public
 featured: true
 ---

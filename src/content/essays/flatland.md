@@ -1,5 +1,5 @@
 ---
-title: 不可測量的維度——向北也要向上
+title: 不可測量的維度
 date: 2024-12-10
 category: 閱讀之家
 tags:
@@ -8,7 +8,7 @@ tags:
   - 維度
   - 親子閱讀
   - 博士班回憶
-description: 從親子共讀《貪心的三角形》，想起《平面國》與博士班往事。
+description: 向北也要向上
 visibility: public
 featured: true
 ---
