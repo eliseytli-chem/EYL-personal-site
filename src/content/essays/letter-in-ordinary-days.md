@@ -1,7 +1,7 @@
 ---
 title: 把日子讀成一封信
 date: 2026-06-12
-category: 文學散文
+category: 人生散文
 tags:
   - 日常
   - 書寫

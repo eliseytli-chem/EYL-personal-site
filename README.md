@@ -1,4 +1,4 @@
-# 一頁之間
+# 一頁留白
 
 以 Astro 建立的繁體中文個人作家網站，文章使用 Markdown 管理，並部署至 GitHub Pages。
 

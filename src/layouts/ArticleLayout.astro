@@ -13,7 +13,7 @@ const { article, previous, next } = Astro.props;
 ---
 
 <BaseLayout
-  title={`${article.data.title}｜一頁之間`}
+  title={`${article.data.title}｜一頁留白`}
   description={article.data.description}
   robots={article.data.visibility === 'unlisted' ? 'noindex, nofollow' : undefined}
 >

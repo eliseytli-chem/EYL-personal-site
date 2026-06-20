@@ -1,7 +1,7 @@
 ---
 title: 寫在公開之前
 date: 2026-06-18
-category: 文學散文
+category: 人生散文
 tags:
   - 書寫
   - 片段

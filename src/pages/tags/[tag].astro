@@ -15,7 +15,7 @@ interface Props { tag: string; articles: Essay[] }
 const { tag, articles } = Astro.props;
 ---
 
-<BaseLayout title={`#${tag}｜文章標籤｜一頁之間`} description={`標記為「${tag}」的文章。`}>
+<BaseLayout title={`#${tag}｜文章標籤｜一頁留白`} description={`標記為「${tag}」的文章。`}>
   <header class="page-heading"><p class="eyebrow">文章標籤</p><h1>#{tag}</h1><p class="lead">共 {articles.length} 篇文章</p></header>
   <ArticleList articles={articles} />
 </BaseLayout>

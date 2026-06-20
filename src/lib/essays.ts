@@ -4,11 +4,13 @@ import { sitePath } from './urls';
 export type Essay = CollectionEntry<'essays'>;
 
 export const MAIN_CATEGORIES = [
-  { name: '家庭閱讀', slug: 'family-reading', note: '一起讀過的書，以及書頁之外的對話。' },
+  { name: '閱讀之家', slug: 'reading-home', note: '書頁、共讀，以及閱讀在家中留下的回聲。' },
+  { name: '孩子的語言', slug: 'childrens-language', note: '聆聽孩子如何說話，也理解他們眼中的世界。' },
   { name: '育兒札記', slug: 'parenting-notes', note: '陪伴孩子長大，也重新理解自己。' },
   { name: '教育思辨', slug: 'education', note: '關於學習、選擇與人的尺度。' },
-  { name: '科學家的母職', slug: 'scientist-motherhood', note: '在研究、工作與照顧之間生活。' },
-  { name: '文學散文', slug: 'literary-essays', note: '日常所見，與那些值得慢慢寫下的事。' },
+  { name: '家庭群像', slug: 'family-portraits', note: '記下家人相處的片刻，以及彼此映照的模樣。' },
+  { name: '職人日常', slug: 'working-life', note: '專業、科學與工作現場裡的日常思索。' },
+  { name: '人生散文', slug: 'life-essays', note: '日常所見，與那些值得慢慢寫下的事。' },
 ] as const;
 
 function newestFirst(a: Essay, b: Essay) {

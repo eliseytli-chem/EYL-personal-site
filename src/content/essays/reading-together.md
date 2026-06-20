@@ -1,7 +1,7 @@
 ---
 title: 一起讀完一本書之後
 date: 2026-05-28
-category: 家庭閱讀
+category: 閱讀之家
 tags:
   - 閱讀
   - 親子

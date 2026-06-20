@@ -16,7 +16,7 @@ interface Props { category: string; articles: Essay[] }
 const { category, articles } = Astro.props;
 ---
 
-<BaseLayout title={`${category}｜文章分類｜一頁之間`} description={`「${category}」分類的文章。`}>
+<BaseLayout title={`${category}｜文章分類｜一頁留白`} description={`「${category}」分類的文章。`}>
   <header class="page-heading"><p class="eyebrow">文章分類</p><h1>{category}</h1><p class="lead">共 {articles.length} 篇文章</p></header>
   <ArticleList articles={articles} />
 </BaseLayout>
