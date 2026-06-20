@@ -33,7 +33,6 @@ const latest = articles.slice(0, 6);
           <article class="featured-card">
             <p class="article-meta"><time datetime={essay.data.date.toISOString()}>{formatDate(essay.data.date)}</time><span>·</span><span>{essay.data.category}</span></p>
             <h3><a href={essayPath(essay)}>{essay.data.title}</a></h3>
-            <p>{essay.data.description}</p>
             <a class="read-link" href={essayPath(essay)} aria-label={`閱讀〈${essay.data.title}〉`}>閱讀文章 <span aria-hidden="true">→</span></a>
           </article>
         ))}

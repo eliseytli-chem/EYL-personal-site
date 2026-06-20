@@ -21,7 +21,6 @@ const { article, previous, next } = Astro.props;
     <header class="article-header">
       <p class="article-kind">文章典藏</p>
       <h1>{article.data.title}</h1>
-      <p class="article-description">{article.data.description}</p>
       <div class="article-details">
         <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
         <span aria-hidden="true">·</span>

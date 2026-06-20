@@ -23,7 +23,6 @@ const { articles, emptyText = '這裡還沒有文章。' } = Astro.props;
             <a href={categoryPath(article.data.category)}>{article.data.category}</a>
           </div>
           <h2><a href={essayPath(article)}>{article.data.title}</a></h2>
-          <p>{article.data.description}</p>
           <ul class="tag-list" aria-label="文章標籤">
             {article.data.tags.map((tag) => <li><a href={tagPath(tag)}>#{tag}</a></li>)}
           </ul>

@@ -34,7 +34,6 @@ const essays = await getPublicEssays();
             <a href={categoryPath(essay.data.category)}>{essay.data.category}</a>
           </div>
           <h2><a href={essayPath(essay)}>{essay.data.title}</a></h2>
-          <p>{essay.data.description}</p>
           <ul class="tag-list" aria-label="文章標籤">
             {essay.data.tags.map((tag) => <li><a href={tagPath(tag)}>#{tag}</a></li>)}
           </ul>
