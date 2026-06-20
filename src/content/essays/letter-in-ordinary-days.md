@@ -6,8 +6,8 @@ tags:
   - 日常
   - 書寫
 description: 在尋常日子裡辨認值得留下的細節，讓寫作成為一種溫柔的回望。
-visibility: public
-featured: true
+visibility: draft
+featured: false
 ---
 
 有些日子過得太快，快得像桌面上一道午後的光。當時只覺得尋常，隔了一段時間再想起，才發現那裡藏著生活真正的重量。

@@ -6,8 +6,8 @@ tags:
   - 閱讀
   - 親子
 description: 共讀的珍貴不只在故事本身，也在闔上書以後仍然延續的對話。
-visibility: public
-featured: true
+visibility: draft
+featured: false
 ---
 
 一本書讀完的時候，故事未必真的結束。孩子有時會在刷牙時突然問起某個角色，也會在幾天後，把故事裡的選擇拿來解釋自己的心情。
