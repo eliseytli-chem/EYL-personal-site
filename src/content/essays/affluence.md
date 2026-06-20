@@ -8,7 +8,7 @@ tags:
   - 家庭
   - 階級流動
   - 成長
-description: 孩子擁有得是更多還是更少
+description: 孩子擁有得更多，父母對未來的擔心卻沒有變少。
 visibility: public
 featured: true
 ---
