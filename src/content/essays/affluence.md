@@ -5,13 +5,12 @@ category: 人生散文
 tags:
   - 母職
   - 世代
-  - 未來
   - 家庭
   - 階級流動
   - 成長
-description: 當孩子擁有前所未有的物質、教育與愛，父母卻仍無法停止對未來的憂慮。
+description: 孩子擁有得更多，父母對未來的擔心卻沒有變少。
 visibility: public
-featured: false
+featured: true
 ---
 
 # 豐盛

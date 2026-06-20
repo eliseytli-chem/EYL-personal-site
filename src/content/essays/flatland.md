@@ -3,17 +3,14 @@ title: 不可測量的維度——向北也要向上
 date: 2024-12-10
 category: 閱讀之家
 tags:
-  - 貪心的三角形
   - 平面國
-  - Flatland
   - 數學小說
   - 維度
   - 親子閱讀
   - 博士班回憶
-  - 理論化學
-description: 從《貪心的三角形》讀到《平面國》，在維度、階級、性別與親子共讀之間重訪一段博士班記憶。
+description: 從親子共讀《貪心的三角形》，想起《平面國》與博士班往事。
 visibility: public
-featured: false
+featured: true
 ---
 
 # 不可測量的維度
